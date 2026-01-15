@@ -1,0 +1,46 @@
+server:
+  port: 8080  # 后端服务端口
+  servlet:
+    context-path: /api  # 注意：你的后端上下文路径是/api，后续接口地址会变成 /api/api/route/getRoute
+
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/quzhou_tourism1?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root  # 你的MySQL用户名
+    password: 3472551509vv  # 你的MySQL密码
+  # 静态资源配置
+  web:
+    resources:
+      static-locations: classpath:static/
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  # 扫描XML映射文件
+  type-aliases-package: com.quzhou.tourism.model.entity  # 实体类别名包
+  configuration:
+    map-underscore-to-camel-case: true  # 下划线转驼峰
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 日志输出
+
+# 第三方API配置
+third-party:
+  # 高德地图配置（扩展支持驾车/步行/公交三种路线类型）
+  amap:
+    key: 2209cb8cb1a64f132e39901c67ce9b90  # 你的后端Web服务Key（保留不变）
+    # 新增：不同路线类型的API地址
+    route-url:
+      driving: https://restapi.amap.com/v3/direction/driving       # 驾车路线
+      walking: https://restapi.amap.com/v3/direction/walking       # 步行路线
+      transit: https://restapi.amap.com/v3/direction/transit/integrated # 公交路线（集成版）
+    connect-timeout: 5000
+    read-timeout: 10000
+  # DeepSeek配置（保留原有内容不变）
+  deepseek:
+    api-key: sk-1c37b7a1f1d74c16974bdafae76b94d6 # 替换为自己的密钥
+    request-url: https://api.deepseek.com/v1/chat/completions
+    model: deepseek-chat
+    connect-timeout: 40000
+    read-timeout: 60000
+    temperature: 0.7
+    max-tokens: 2048

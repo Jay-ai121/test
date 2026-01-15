@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quzhou.tourism.mapper.TravelGuideMapper">
+
+    <!-- 查询热门攻略（按浏览量排序） -->
+    <select id="selectHotGuides" resultType="com.quzhou.tourism.model.vo.TravelGuideVO">
+        select id, guide_title, author, view_count, create_time
+        from travel_guide
+        order by view_count desc
+        limit #{limit}
+    </select>
+
+</mapper>

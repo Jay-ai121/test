@@ -1,0 +1,334 @@
+/*
+ * 全局样式文件
+ * 作用：重置浏览器默认样式、统一项目基础样式、定义公共变量和工具类
+ * 路径：src/assets/styles/global.css
+ */
+
+/* ========== 关键添加：引入 Tailwind CSS 核心样式 ========== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. 样式重置（Reset CSS）：消除浏览器默认样式差异 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  background-color: #f5f7fa;
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+/* 清除列表默认样式 */
+ul, ol {
+  list-style: none;
+}
+
+/* 清除链接默认样式 */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #27ae60; /* 全局链接hover颜色，与项目主色调一致 */
+}
+
+/* 清除按钮默认样式 */
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* 清除输入框默认样式 */
+input, textarea, select {
+  outline: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* 图片自适应 */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 清除浮动 */
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+}
+
+/* 2. 全局样式变量（可通过 Tailwind CSS 配置关联，此处做兜底定义） */
+:root {
+  /* 主色调：绿色（贴合衢州山水人文特色） */
+  --primary-color: #27ae60;
+  --primary-color-light: #2ecc71;
+  --primary-color-dark: #219653;
+  /* 辅助色调：古铜色（贴合衢州南孔文化底蕴） */
+  --secondary-color: #c2a661;
+  --secondary-color-light: #d4b875;
+  /* 中性色调 */
+  --text-color-main: #2c3e50;
+  --text-color-secondary: #666666;
+  --text-color-placeholder: #999999;
+  --bg-color-white: #ffffff;
+  --bg-color-gray-light: #f5f7fa;
+  --bg-color-gray: #e5e9f0;
+  --border-color: #e0e0e0;
+  /* 常用尺寸 */
+  --header-height: 64px;
+  --footer-height: 280px;
+  --container-max-width: 1200px;
+  /* 阴影样式 */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 3. 通用工具类样式（补充 Tailwind CSS 未覆盖的常用样式） */
+/* 容器居中 */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 弹性布局 - 水平垂直居中 */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 弹性布局 - 水平两端对齐，垂直居中 */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 弹性布局 - 垂直排列 */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 文字超出一行隐藏（省略号） */
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 文字超出两行隐藏（省略号） */
+.text-ellipsis-2 {
+  display: -webkit-box;
+  /* 标准属性（消除警告） */
+  line-clamp: 2;
+  /* 私有属性（兼容旧浏览器） */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 文字超出三行隐藏（省略号） */
+.text-ellipsis-3 {
+  display: -webkit-box;
+  /* 标准属性（消除警告） */
+  line-clamp: 3;
+  /* 私有属性（兼容旧浏览器） */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 隐藏滚动条（保留滚动功能） */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: var(--bg-color-white);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* 按钮通用样式 - 主按钮 */
+.btn-primary {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-light);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background-color: var(--bg-color-gray);
+  color: var(--text-color-placeholder);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 按钮通用样式 - 次要按钮 */
+.btn-secondary {
+  display: inline-block;
+  padding: 7px 15px;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(39, 174, 96, 0.05);
+}
+
+/* 4. Element Plus 样式覆盖（统一组件样式与项目风格） */
+/* 分页组件 */
+.el-pagination {
+  padding: 16px 0;
+}
+
+.el-pagination.is-background .el-pager li {
+  border-radius: 6px;
+}
+
+.el-pagination.is-background .el-pager li.active {
+  background-color: var(--primary-color);
+}
+
+/* 标签组件 */
+.el-tag {
+  border-radius: 4px;
+}
+
+.el-tag--success {
+  background-color: rgba(46, 204, 113, 0.1);
+  color: var(--primary-color);
+  border: none;
+}
+
+/* 输入框组件 */
+.el-input__wrapper {
+  border-radius: 6px;
+  box-shadow: none;
+  border-color: var(--border-color);
+}
+
+.el-input__wrapper.is-focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
+}
+
+/* 5. 全局动画样式 */
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 从下往上滑入动画 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+/* 6. 响应式适配补充 */
+/* 小屏幕（手机，小于768px） */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 56px;
+    --footer-height: 220px;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* 大屏幕（桌面，大于1200px） */
+@media (min-width: 1201px) {
+  .container {
+    padding: 0;
+  }
+}
+
+/* ========== 补充：修复 Tailwind 可能的样式冲突 ========== */
+/* 确保 flex 布局生效（兼容自定义样式） */
+.flex {
+  display: flex !important;
+}
+
+/* 确保容器最大宽度不冲突 */
+.max-w-7xl {
+  max-width: 112rem !important;
+}
+
+/* 确保卡片阴影和圆角生效 */
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem !important;
+}

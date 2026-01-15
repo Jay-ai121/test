@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quzhou.tourism.mapper.UserTripMapper">
+
+    <!-- 通用结果映射 -->
+    <resultMap id="UserTripResultMap" type="com.quzhou.tourism.model.entity.UserTrip">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="trip_name" property="tripName" jdbcType="VARCHAR"/>
+        <result column="user_question" property="userQuestion" jdbcType="LONGVARCHAR"/>
+        <result column="ai_trip_content" property="aiTripContent" jdbcType="LONGVARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 保存用户行程 -->
+    <insert id="insert" parameterType="com.quzhou.tourism.model.entity.UserTrip" useGeneratedKeys="true" keyProperty="id">
+        insert into user_trip
+        (trip_name, user_question, ai_trip_content, create_time)
+        values
+        (#{tripName}, #{userQuestion}, #{aiTripContent}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <!-- 根据ID查询用户行程 -->
+    <select id="selectById" parameterType="java.lang.Long" resultMap="UserTripResultMap">
+        select id, trip_name, user_question, ai_trip_content, create_time
+        from user_trip
+        where id = #{id}
+    </select>
+
+</mapper>

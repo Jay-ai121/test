@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quzhou.tourism.mapper.ScenicSpotMapper">
+
+    <!-- 查询推荐景点 -->
+    <select id="selectRecommendScenics" resultType="com.quzhou.tourism.model.vo.ScenicListVO">
+        select id, scenic_name, scenic_img, rating, scenic_address
+        from scenic_spot
+        order by rating desc
+        limit #{limit}
+    </select>
+
+    <!-- 分页查询景点列表 -->
+    <select id="selectScenicList" resultType="com.quzhou.tourism.model.vo.ScenicListVO">
+        select id, scenic_name, scenic_img, rating, scenic_address
+        from scenic_spot
+        order by create_time desc
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <!-- 查询景点总条数 -->
+    <select id="selectScenicTotalCount" resultType="java.lang.Integer">
+        select count(1) from scenic_spot
+    </select>
+
+    <!-- 查询景点详情 -->
+    <select id="selectScenicDetailById" resultType="com.quzhou.tourism.model.vo.ScenicDetailVO">
+        select id, scenic_name, scenic_address, longitude, latitude,
+               scenic_intro, scenic_img, rating
+        from scenic_spot
+        where id = #{id}
+    </select>
+
+</mapper>
